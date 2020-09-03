@@ -54,25 +54,27 @@ namespace UnoSquare_Maintenance
             element = Browser.FindElement(program.GoogleSearchBar);
 
             // Write Assert True that element is present [Google Search] button
+            Assert.IsTrue(program.GoogleSearIcon != null);
 
             //Send the text "Unosquare" to the Text Bar
             program.SendText(element, "Unosquare");
 
             // Click on the Search Button
-            element = Browser.FindElement(program.GoogleSearIcon);
+            program.Click(Browser.FindElement(program.GoogleSearIcon));
 
             // Write Assert Equal [Unosquare: Digital Transformation Services | Agile Staffing ...] vs [Element.text]
+            Assert.AreEqual("Unosquare: Digital Transformation Services | Agile Staffing ...", Browser.FindElement(By.XPath("//h3[contains(text(),'Unosquare: Digital Transformation Services | Agile')]")).Text);
 
             // Locate the first result corresponding to Unosquare and click on the Link
             element = Browser.FindElement(program.UnoSquareGoogleResult);
-
             program.Click(element);
 
             // Write Assert True that element is present [Our Dna] menu object
-
+            Assert.IsTrue(Browser.FindElement(By.CssSelector("li > a[href='/OurDna']")).Displayed);
             // Write Assert True that element is present [Articles & Events] menu object
+            Assert.IsTrue(Browser.FindElement(By.CssSelector("li > a[href='/Articles']")).Displayed);
+            // Write Assert Equal [Digital transformation solutions] vs [Element.text] h2 ojbect -- Where is this element? I don't see it. -Sergio.
 
-            // Write Assert Equal [Digital transformation solutions] vs [Element.text] h2 ojbect
 
             //Locate the Service Menu and Click the element
             element = Browser.FindElement(program.UnoSquareServicesMenu);
